@@ -1,0 +1,80 @@
+{
+  "name": "@npkgdev/rtsp-ffmpeg",
+  "version": "1.0.0",
+  "description": "Typescript FFMpeg wrapper for rtsp streaming",
+  "author": "Douglas de Paula Natalli",
+  "license": "MIT",
+  "keywords": [],
+  "bugs": "https://github.com/npkgdev/rtsp-ffmpeg/issues",
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "format": "prettier --write \"**/*.ts\"",
+    "lint": "eslint 'lib/**/*.ts' --fix",
+    "prepublish": "npm run build",
+    "test": "jest",
+    "prerelease": "npm run build",
+    "release": "npx semantic-release"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "16.2.3",
+    "@commitlint/config-angular": "16.2.3",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^8.0.2",
+    "@semantic-release/npm": "^9.0.1",
+    "@semantic-release/release-notes-generator": "^10.0.3",
+    "@types/jest": "27.4.1",
+    "@types/lodash": "^4.14.180",
+    "@types/node": "^17.0.23",
+    "@typescript-eslint/eslint-plugin": "5.16.0",
+    "@typescript-eslint/parser": "5.16.0",
+    "husky": "7.0.4",
+    "jest": "27.5.1",
+    "lint-staged": "12.3.7",
+    "prettier": "2.6.1",
+    "reflect-metadata": "0.1.13",
+    "rimraf": "3.0.2",
+    "semantic-release": "^19.0.2",
+    "ts-jest": "27.1.4",
+    "typescript": "4.6.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -c .commitlintrc.json -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/npkgdev/rtsp-ffmpeg"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "engine": {
+    "node": ">=12"
+  }
+}

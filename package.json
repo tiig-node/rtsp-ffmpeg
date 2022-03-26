@@ -1,17 +1,21 @@
 {
   "name": "@npkgdev/rtsp-ffmpeg",
   "version": "1.0.0",
-  "description": "Typescript FFMpeg wrapper for rtsp streaming",
+  "description": "Typescript FFMpeg wrapper for streaming RTSP",
   "author": "Douglas de Paula Natalli",
   "license": "MIT",
-  "keywords": [],
-  "bugs": "https://github.com/npkgdev/rtsp-ffmpeg/issues",
+  "url": "https://github.com/npkgdev/rtsp-ffmpeg#readme",
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.build.json",
-    "format": "prettier --write \"**/*.ts\"",
-    "lint": "eslint 'lib/**/*.ts' --fix",
-    "prepublish": "npm run build",
-    "test": "jest",
+    "build": "rimraf dist && tsc -p tsconfig.json",
+    "format": "prettier --write \"lib/**/*.ts\"",
+    "lint": "eslint \"lib/**/*.ts\" --fix",
+    "prepublish:npm": "npm run build",
+    "publish:npm": "npm publish --access public",
+    "prepublish:next": "npm run build",
+    "publish:next": "npm publish --access public --tag next",
+    "test:e2e": "jest --config ./tests/jest-e2e.json --runInBand",
+    "test:e2e:dev": "jest --config ./tests/jest-e2e.json --runInBand --watch",
+    "prepare": "husky install",
     "prerelease": "npm run build",
     "release": "npx semantic-release"
   },
@@ -32,6 +36,9 @@
     "@types/node": "^17.0.23",
     "@typescript-eslint/eslint-plugin": "5.16.0",
     "@typescript-eslint/parser": "5.16.0",
+    "eslint": "8.12.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-import": "2.25.4",
     "husky": "7.0.4",
     "jest": "27.5.1",
     "lint-staged": "12.3.7",
@@ -42,37 +49,12 @@
     "ts-jest": "27.1.4",
     "typescript": "4.6.3"
   },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".spec.ts$",
-    "transform": {
-      "^.+\\.ts$": "ts-jest"
-    },
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
-  },
-  "lint-staged": {
-    "*.ts": [
-      "prettier --write"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -c .commitlintrc.json -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/npkgdev/rtsp-ffmpeg"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "engine": {
     "node": ">=12"
